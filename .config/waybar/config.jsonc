@@ -1,0 +1,118 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", // Waybar at top layer
+    "position": "left", // Waybar position (top|bottom|left|right)
+    "margin-top": 10,
+    "margin-bottom": 10,
+    "margin-left": 10,
+    "margin-right": 0,
+    //"height": 20, // Waybar height (to be removed for auto height)
+    "width": 20, // Waybar width
+    "spacing": 5, // Gaps between modules (4px)
+		// "gtk-layer-shell": true,
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+	"custom/powerbutton"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "temperature",
+        "backlight",
+        "battery",
+        "clock"
+    ],
+
+     "hyprland/workspaces": {
+         "format": "{icon}",
+         "format-icons": {
+             "1": "",
+             "2": "",
+	     			 "3": "󰈹",
+             "4": "",
+             "5": "",
+    	     	 "6": "",
+    	       "7": "󰉋",
+             "8": "",
+             "9": "",
+             "10": "󰙯"
+	 },
+	 "persistent-workspaces": {
+             "1": [],
+	     "2": [],
+	     "3": [],
+	     "4": [],
+	     "5": [],
+	     "6": [],
+	     "7": [],
+	     "8": [],
+	     "9": [],
+	     "10": []
+	 }
+     },
+    "clock": {
+	"format": "{:%H\n%M}",
+        "format-alt": "{:%d\n%m}"
+    },
+    "cpu": {
+        "format": "󱢇\n{usage}",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "󰢛\n{}",
+	"tooltip": false
+    },
+    "temperature": {
+        "thermal-zone": 1,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 65,
+        "format-critical": "󰈸\n{temperatureC}",
+        "format": "󱄅\n{temperatureC}",
+	"tooltip": false
+    },
+    "backlight": {
+        "format": "{icon}\n{percent}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+	"tooltip": false
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}\n{capacity}",
+        "format-charging": "\n{capacity}",
+        "format-plugged": "\n{capacity}",
+        "format-icons": ["", "", "", "", ""],
+	"tooltip": true,
+	"tooltip-format": "{timeTo}"
+    },
+    "network": {
+        "format-wifi": "󰖩\n{signalStrength}",
+        "format-disconnected": "{󰖪}",
+	"tooltip": false
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon}\n{volume}",
+        "format-muted": " 󰝟\n{format_source}",
+        "format-source": "\n{volume}",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+				"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+	      "on-click-right": "pavucontrol", 
+				"tooltip": false
+    },
+    "custom/powerbutton": {
+ 		 		"format": "",
+    		"tooltip": false
+    }
+}
