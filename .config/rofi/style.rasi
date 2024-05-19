@@ -11,7 +11,7 @@
 configuration {
 	modi:                       "drun,run,filebrowser,window";
     show-icons:                 true;
-    display-drun:               "";
+    display-drun:               "";
     display-run:                "";
     display-filebrowser:        "";
     display-window:             "";
@@ -73,10 +73,10 @@ inputbar {
     spacing:                     10px;
     padding:                     100px 40px;
     background-color:            transparent;
-    background-image:            url("~/images/Angel.jpg", width);
+    background-image:            url("~/images/berkbg/Nose\ thing.jpg", width);
     text-color:                  @foreground;
     orientation:                 horizontal;
-    children:                    [ "textbox-prompt-colon", "entry" ];
+    children:                    [ /* "textbox-prompt-colon",*/ "entry" ];
 }
 textbox-prompt-colon {
     enabled:                     true;
@@ -95,7 +95,7 @@ entry {
     background-color:            @background-alt;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Search";
+    placeholder:                 "Amog sus?";
     placeholder-color:           inherit;
 }
 
@@ -122,7 +122,7 @@ button selected {
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       5;
+    lines:                       2;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;

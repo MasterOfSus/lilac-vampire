@@ -1,9 +1,10 @@
+
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- random configs:
-vim.wo.relativenumber = true
+vim.wo.number = true
 
 vim.opt.tabstop = 2
 
@@ -48,6 +49,9 @@ Plug('catppuccin/nvim')
 -- status line
 Plug('nvim-lualine/lualine.nvim')
 
+-- startup screen
+Plug('goolord/alpha-nvim')
+
 vim.call('plug#end')
 
 -- 24-bit colour
@@ -64,11 +68,15 @@ require("nvim-tree").setup({
 -- vimtex configuration
 
 vim.cmd([[
-filetype plugin indent on
+	filetype plugin indent on
+	syntax enable
 ]])
 
+vim.g.mapleader = ':'
+vim.g.maplocalleader = ' '
+
 vim.g.vimtex_view_method = "zathura"
-vim.g.vimtex_compiler_method = "pdftex"
+-- vim.g.vimtex_compiler_method = "latex-mk"
 
 -- treesitter configuration
 
@@ -96,7 +104,8 @@ require'nvim-treesitter.configs'.setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = { "c", "rust" },
+    disable = { "c", "rust", "latex", },
+		additional_vim_regex_highlighting = { "latex", "markdown" },
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
     disable = function(lang, buf)
         local max_filesize = 100 * 1024 -- 100 KB
@@ -243,3 +252,39 @@ require('lualine').setup({
 		theme = "catppuccin",
   },
 })
+
+local alpha = require("alpha")
+local dashboard = require("alpha.themes.dashboard")
+
+-- Set header
+dashboard.section.header.val = {
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"      へ  ❤️  ╱|、     ",
+	"    ૮ - ՛)  (` - 7    ",
+	"    / ⁻៸|    |、⁻〵   ",
+	" 乀(ˍ,ل ل    じしˍ,)ノ",
+}
+
+-- Set menu
+dashboard.section.buttons.val = {
+    dashboard.button( "f", "  > Find file", ":Telescope find_files<CR>"),
+		dashboard.button( "t", "󰉋  > File Manager", ":NvimTreeOpen<CR>"),
+    dashboard.button( "q", "  > Quit NVIM", ":qa<CR>"),
+}
+
+-- Send config to alpha
+alpha.setup(dashboard.opts)
+
+-- Disable folding on alpha buffer
+vim.cmd([[
+    autocmd FileType alpha setlocal nofoldenable
+]])
