@@ -86,13 +86,35 @@ tooltip * {
 	color: #c182ff;
 }
 */
+
+#network.icon {
+	font-size: 15px;
+	margin-right: 4px;
+	margin-bottom: -4px;
+}
+
 #network {
 	transition: none;
 	color: #c182ff;
 }
 
+#pulseaudio.icon {
+	margin-bottom: -6px;
+	margin-right: 2px;
+	font-size: 17px;
+}
+
 #pulseaudio {
+	margin-right: 0px;
 	color: #c182ff;
+}
+
+#temperature.icon {
+	color: #c182ff;
+	margin-right: 4px;
+	margin-bottom: -5px;
+	margin-top: -3px;
+	font-size: 17px;
 }
 
 #temperature {
@@ -100,8 +122,21 @@ tooltip * {
 	color: #c182ff;
 }
 
+#cpu.icon {
+	font-size: 17px;
+	margin-bottom: -4px;
+	margin-right: 4px;
+}
+
 #cpu {
 	color: #c182ff;
+}
+
+#memory.icon {
+	font-size: 17px;
+	margin-bottom: -6px;
+	margin-right: 6px;
+	margin-top: -3px;
 }
 
 #memory {
@@ -109,8 +144,23 @@ tooltip * {
 	color: #c182ff;
 }
 
+#backlight.icon {
+	font-size: 17px;
+	margin-bottom: -5px;
+	margin-right: 3px;
+	margin-top: -2px;
+}
+
 #backlight {
 	color: #c182ff;
+	margin-right: 0px;
+}
+
+#battery.icon {
+	font-size: 16px;
+	margin-bottom: -2px;
+	margin-top: -2px;
+	margin-right: 8px;
 }
 
 #battery {
@@ -121,6 +171,7 @@ tooltip * {
 	margin-bottom: 8px;
 	transition: none;
 	color: #c182ff;
+	margin-top: -2px;
 	background: transparent;
 }
 

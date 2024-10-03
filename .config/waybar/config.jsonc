@@ -8,7 +8,7 @@
     "margin-right": 0,
     //"height": 20, // Waybar height (to be removed for auto height)
     "width": 20, // Waybar width
-    "spacing": 5, // Gaps between modules (4px)
+    "spacing": 3, // Gaps between modules (4px)
 		// "gtk-layer-shell": true,
     // Choose the order of the modules
     "modules-left": [
@@ -18,12 +18,19 @@
 	"custom/powerbutton"
     ],
     "modules-right": [
+				"pulseaudio#icon",
         "pulseaudio",
+				"network#icon",
         "network",
-        "cpu",
+        "cpu#icon",
+				"cpu",
+				"memory#icon",
         "memory",
+				"temperature#icon",
         "temperature",
+				"backlight#icon",
         "backlight",
+				"battery#icon",
         "battery",
         "clock"
     ],
@@ -56,61 +63,97 @@
 	 }
      },
     "clock": {
-	"format": "{:%H\n%M}",
-        "format-alt": "{:%d\n%m}"
+				"format": "{:%H\n%M}",
+        "format-alt": "{:%d\n%m}",
+				"tooltip": false
     },
+		"cpu#icon": {
+				"format": "󱢇",
+				"tooltip": false,
+		},
     "cpu": {
-        "format": "󱢇\n{usage}",
-        "tooltip": false
+        "format": "{usage}",
+        "tooltip": false,
+				"justify": "center",
     },
+		"memory#icon": {
+			"format": "󰢛",
+			"tooltip": false,
+		},
     "memory": {
-        "format": "󰢛\n{}",
-	"tooltip": false
+        "format": "{}",
+				"tooltip": false,
+				"justify": "center"
     },
+		"temperature#icon": {
+				"thermal-zone": 1,
+				"critical-threshold": 65,
+				"format-critical": "󰈸",
+				"format": "󱄅",
+				"tooltip": false,
+		},
     "temperature": {
         "thermal-zone": 1,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 65,
-        "format-critical": "󰈸\n{temperatureC}",
-        "format": "󱄅\n{temperatureC}",
-	"tooltip": false
+        "format-critical": "{temperatureC}",
+        "format": "{temperatureC}",
+				"justify": "center",
+				"tooltip": false
     },
+		"backlight#icon": {
+				"format": "{icon}",
+				"format-icons": ["", "", "", "", "", "", "", "", ""],
+				"tooltip": false
+		},
     "backlight": {
-        "format": "{icon}\n{percent}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""],
-	"tooltip": false
+        "format": "{percent}",
+				"justify": "center",
+				"tooltip": false
     },
-    "battery": {
+    "battery#icon": {
         "states": {
             // "good": 95,
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}\n{capacity}",
-        "format-charging": "\n{capacity}",
-        "format-plugged": "\n{capacity}",
+        "format": "{icon}",
+        "format-charging": "",
         "format-icons": ["", "", "", "", ""],
-	"tooltip": true,
-	"tooltip-format": "{timeTo}"
+				"tooltip": true,
+				"tooltip-format": "{timeTo}",
     },
+		"battery": {
+				"format": "{capacity}",
+				"tooltip": false,
+				"justify": "center"
+		},
+		"network#icon": {
+				"format-wifi": "󰖩",
+				"tooltip": false
+		},
     "network": {
-        "format-wifi": "󰖩\n{signalStrength}",
-        "format-disconnected": "{󰖪}",
-	"tooltip": false
+        "format-wifi": "{signalStrength}",
+				"tooltip": false,
+				"justify": "center"
     },
-    "pulseaudio": {
+    "pulseaudio#icon": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon}\n{volume}",
-        "format-muted": " 󰝟\n{format_source}",
-        "format-source": "\n{volume}",
-        "format-source-muted": "",
+        "format": "{icon}"/*\n{format_source}"*/,
+        "format-muted": "󰝟"/*\n{format_source}"*/,
+        //"format-source": "",
+        //"format-source-muted": "",
         "format-icons": {
             "default": ["󰕿", "󰖀", "󰕾"]
         },
 				"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
 	      "on-click-right": "pavucontrol", 
-				"tooltip": false
+				"tooltip": false,
     },
+		"pulseaudio": {
+				"format": "{volume}",
+				"justify": "center"
+		},
     "custom/powerbutton": {
  		 		"format": "",
     		"tooltip": false
