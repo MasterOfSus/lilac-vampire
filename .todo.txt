@@ -3,6 +3,5 @@ set qt5 theme (dracula/catppuccin)
 set firefox theme
 set up wifi
 set up greetd automatic login with hyprlock execution right after
-correct colors for neovim?
 maybe reconsider waybar theme
 discord theme
