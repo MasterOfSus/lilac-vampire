@@ -156,6 +156,6 @@
 		},
     "custom/powerbutton": {
  		 		"format": "",
-    		"tooltip": false
+    		"tooltip": false,
     }
 }

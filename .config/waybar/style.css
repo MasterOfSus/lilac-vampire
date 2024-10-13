@@ -56,6 +56,10 @@ tooltip * {
 	transition: none;
 }
 
+#workspaces * {
+	font-size: 16px;
+}
+
 #workspaces button {
 	transition: none;
 	color: #c182ff;
@@ -177,8 +181,6 @@ tooltip * {
 
 #custom-powerbutton {
 	font-size: 24px;
-	margin-right: 9px;
-	margin-top: 4px;
-	margin-bottom: 4px;
 	color: #c182ff;
+	margin-right: 9px;
 }
