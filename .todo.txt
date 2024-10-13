@@ -2,9 +2,5 @@ set gtk theme (dracula/catppuccin)
 set qt5 theme (dracula/catppuccin)
 set firefox theme
 set up wifi
-<<<<<<< HEAD
-=======
-set up greetd automatic login with hyprlock execution right after
->>>>>>> 05765e1e10be8ebf3b3b814faa5de09539d9b369
-maybe reconsider waybar theme
+maybe upgrade waybar theme
 discord theme
