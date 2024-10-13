@@ -1,4 +1,3 @@
-set colors for the zsh autosuggestions
 set gtk theme (dracula/catppuccin)
 set qt5 theme (dracula/catppuccin)
 set firefox theme
