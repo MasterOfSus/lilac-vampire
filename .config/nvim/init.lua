@@ -52,6 +52,14 @@ Plug('nvim-lualine/lualine.nvim')
 -- startup screen
 Plug('goolord/alpha-nvim')
 
+-- tab bar (barbar)
+Plug('nvim-tree/nvim-web-devicons')
+Plug('lewis6991/gitsigns.nvim')
+Plug('romgrk/barbar.nvim')
+
+-- arduino
+Plug('stevearc/vim-arduino')
+
 vim.call('plug#end')
 
 -- 24-bit colour
@@ -82,7 +90,7 @@ vim.g.vimtex_view_method = "zathura"
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "latex", "cpp", "bash" },
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "latex", "cpp", "bash", "arduino" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -125,8 +133,10 @@ require'nvim-treesitter.configs'.setup {
 
 -- lspconfig config
 local lspconfig = require('lspconfig')
+
 require'lspconfig'.clangd.setup {}
 require'lspconfig'.texlab.setup {}
+require'lspconfig'.arduino_language_server.setup{}
 
 -- cmp configuration
 
@@ -238,13 +248,29 @@ catppuccin.setup {
 
 vim.cmd.colorscheme "catppuccin"
 
+local function arduino_status()
+  if vim.bo.filetype ~= "arduino" then
+    return ""
+  end
+  local port = vim.fn["arduino#GetPort"]()
+  local line = string.format("[%s]", vim.g.arduino_board)
+  if vim.g.arduino_programmer ~= "" then
+    line = line .. string.format(" [%s]", vim.g.arduino_programmer)
+  end
+  if port ~= 0 then
+    line = line .. string.format(" (%s:%s)", port, vim.g.arduino_serial_baud)
+  end
+  return line
+end
+
 require('lualine').setup({
   options = {
 		icons_enabled = true,
-		component_separators = {left = "", right = ""},
+		component_separators = {left = "", right = ""},
 		section_separators = {left = "", right = ""},
 		sections = {
     	lualine_a = {"mode"},
+			lualine_b = { arduino_status },
   		lualine_x = {"filename", "encoding", "fileformat"},
   		lualine_y = {"progress"},
 			lualine_z = {"location"},
@@ -288,3 +314,52 @@ alpha.setup(dashboard.opts)
 vim.cmd([[
     autocmd FileType alpha setlocal nofoldenable
 ]])
+
+-- barbar configuration
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- Move to previous/next
+map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
+map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+-- Re-order to previous/next
+map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
+map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+-- Goto buffer in position...
+map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
+map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
+map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
+map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
+map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
+map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
+map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
+map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
+map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+-- Pin/unpin buffer
+map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+-- Goto pinned/unpinned buffer
+--                 :BufferGotoPinned
+--                 :BufferGotoUnpinned
+-- Close buffer
+map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+-- Wipeout buffer
+--                 :BufferWipeout
+-- Close commands
+--                 :BufferCloseAllButCurrent
+--                 :BufferCloseAllButPinned
+--                 :BufferCloseAllButCurrentOrPinned
+--                 :BufferCloseBuffersLeft
+--                 :BufferCloseBuffersRight
+-- Magic buffer-picking mode
+map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+-- Sort automatically by...
+map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+map('n', '<Space>bn', '<Cmd>BufferOrderByName<CR>', opts)
+map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
+map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
+
+-- Other:
+-- :BarbarEnable - enables barbar (enabled by default)
+-- :BarbarDisable - very bad command, should never be used

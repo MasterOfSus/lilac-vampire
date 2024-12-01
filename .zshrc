@@ -33,6 +33,8 @@ alias openpkglist='nvim ~/.installedpkg'
 
 alias sudo='doas'
 
+alias formatall='clang-format ./*'
+
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -60,4 +62,12 @@ zstyle :compinstall filename '/home/mogus/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# ma quante volte devo scrivere -la!!!!!
+# https://t.ly/AQtnW
+alias ll='ls -la'
+alias l='ls -l'
+
+export PATH=.:$PATH
+export MANPAGER='nvim +Man!'
 

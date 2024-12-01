@@ -28,11 +28,15 @@ tooltip {
 	border: 2px solid #c182ff;
 	border-radius: 13px;
 	text-shadow: none;
-	background-color: rgba(19, 9, 29, 1);
+	background-color: rgba(19, 9, 29, 0.5);
+	margin: 30px;
 }
 
 tooltip * {
 	color: #c182ff;
+}
+
+tooltip label {
 }
 
 #window {
