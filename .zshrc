@@ -11,12 +11,12 @@ fi
 # ~/.zshrc
 #
 alias ls='ls --color=auto'
-alias grap='grep --color=auto'
+alias grep='grep --color=auto'
 
-alias artixbtw='clear; fastfetch'
+alias btw='clear; fastfetch'
 
 alias useless='pacman -Qtdq'
-alias ckweb='ping artixlinux.org'
+alias ckweb='curl artixlinux.org; ping artixlinux.org'
 alias updatepkglist='pacman -Qqe > ~/.installedpkg'
 alias update='doas pacman -Syyu'
 alias uninstallpkg='doas pacman -Rscn'
@@ -34,6 +34,8 @@ alias openpkglist='nvim ~/.installedpkg'
 alias sudo='doas'
 
 alias formatall='clang-format ./*'
+
+alias blue='doas sv up bluetoothd'
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -53,7 +55,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=10000
 setopt autocd extendedglob
-unsetopt beep
+
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -61,6 +63,7 @@ zstyle :compinstall filename '/home/mogus/.zshrc'
 
 autoload -Uz compinit
 compinit
+
 # End of lines added by compinstall
 
 # ma quante volte devo scrivere -la!!!!!
@@ -68,6 +71,7 @@ compinit
 alias ll='ls -la'
 alias l='ls -l'
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8b3fb2"
+
 export PATH=.:$PATH
 export MANPAGER='nvim +Man!'
-
