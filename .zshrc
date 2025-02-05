@@ -36,6 +36,8 @@ alias sudo='doas'
 alias formatall='clang-format ./*'
 
 alias blue='doas sv up bluetoothd'
+alias poweroff='doas poweroff'
+alias connect='nmcli connection up'
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
