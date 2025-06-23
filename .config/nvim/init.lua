@@ -10,8 +10,39 @@ vim.opt.tabstop = 2
 
 vim.opt.shiftwidth = 2
 
--- vim plug
+-- Set rounded borders for LSP hover, signature help, etc.
+local border = "rounded"
+local handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+}
 
+for name, handler in pairs(handlers) do
+  vim.lsp.handlers[name] = handler
+end
+
+-- Patch vim.ui.* to use rounded borders
+local orig_select = vim.ui.select
+vim.ui.select = function(...)
+  local args = select(2, ...) -- options, on_choice, opts
+  if type(args) == "table" and type(args[3]) == "table" then
+    args[3].border = args[3].border or "rounded"
+  end
+  return orig_select(...)
+end
+
+-- Rounded border style for error popups
+vim.diagnostic.config({
+  float = { border = "rounded" },
+})
+
+local orig_input = vim.ui.input
+vim.ui.input = function(opts, ...)
+  opts.border = opts.border or "rounded"
+  return orig_input(opts, ...)
+end
+
+-- vim plug
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
@@ -22,6 +53,9 @@ Plug('nvim-tree/nvim-web-devicons')
 
 -- vimtex
 Plug('lervag/vimtex')
+
+-- image.nvim
+Plug('3rd/image.nvim')
 
 -- treesitter
 Plug('nvim-treesitter/nvim-treesitter')
@@ -85,6 +119,7 @@ vim.g.maplocalleader = ' '
 
 vim.g.vimtex_view_method = "zathura"
 -- vim.g.vimtex_compiler_method = "latex-mk"
+vim.g.vimtex_view_forward_search_on_start = false
 
 -- treesitter configuration
 
@@ -150,8 +185,8 @@ cmp.setup({
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -165,8 +200,32 @@ cmp.setup({
     { name = 'luasnip' }, -- For luasnip users.
   }, {
     { name = 'buffer' },
-  })
+  }),
 })
+
+-- luasnip for latex
+local ls = require("luasnip")
+local s = ls.snippet
+local fmt = require("luasnip.extras.fmt").fmt
+ls.add_snippets(
+	"tex",
+	{
+		s(
+		"basetext",
+		fmt(
+			[[
+			\documentclass{{article}}
+			\usepackage{{graphicx}}
+
+			\begin {{document}}
+
+			\end {{document}}
+			]],
+			{}
+			)
+		)
+	}
+)
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
@@ -279,6 +338,53 @@ require('lualine').setup({
   },
 })
 
+-- border color override
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#c182ff", bg = "none" })
+-- Scrollbar thumb override
+vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#50fa7b" })
+
+-- image.nvim
+require("image").setup({
+  backend = "kitty",
+  processor = "magick_cli", -- or "magick_rock"
+  integrations = {
+    markdown = {
+      enabled = true,
+      clear_in_insert_mode = false,
+      download_remote_images = true,
+      only_render_image_at_cursor = false,
+      only_render_image_at_cursor_mode = "popup",
+      floating_windows = false, -- if true, images will be rendered in floating markdown windows
+      filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
+    	resolve_image_path = function(document_path, image_path, fallback)
+				return "/home/mogus/images/"..image_path end,
+		},
+    neorg = {
+      enabled = true,
+      filetypes = { "norg" },
+    },
+    typst = {
+      enabled = true,
+      filetypes = { "typst" },
+    },
+    html = {
+      enabled = false,
+    },
+    css = {
+      enabled = false,
+    },
+  },
+  max_width = nil,
+  max_height = nil,
+  max_width_window_percentage = nil,
+  max_height_window_percentage = 50,
+  window_overlap_clear_enabled = false, -- toggles images when windows are overlapped
+  window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "snacks_notif", "scrollview", "scrollview_sign" },
+  editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
+  tmux_show_only_in_active_window = false, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+  hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
+})
+
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
@@ -318,6 +424,10 @@ vim.cmd([[
 -- barbar configuration
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
+
+-- popup windows with error messages
+vim.o.updatetime = 2000 -- Delay before showing floating message
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Move to previous/next
 map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
