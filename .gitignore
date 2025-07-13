@@ -18,6 +18,10 @@
 .local/share/mime/
 .local/share/nvim/tree-sitter-gitcommit.tar.gz
 .local/share/vulkan/
+.local/share/Zeal
+.config/Zeal
+.local/share/kicad
+.config/kicad
 .npm/
 .powerlevel10k/
 .pulse-cookie
@@ -28,10 +32,13 @@
 .zen/
 .zsh/
 Monero/
-images/Five dollar footlong.jpg
+images/Five dollar foot long.jpg
 images/hector.jpeg
 images/mtfuck.png
 images/mtfuck.webp
 images/sussy.gif
+images/sr-71 shirt/
+images/corporate insight.png
+
 measureme
 powerlevel10k/

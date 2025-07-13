@@ -125,7 +125,7 @@ vim.g.vimtex_view_forward_search_on_start = false
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "latex", "cpp", "bash", "arduino" },
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "latex", "cpp", "bash", "arduino", "qmljs" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -172,6 +172,9 @@ local lspconfig = require('lspconfig')
 require'lspconfig'.clangd.setup {}
 require'lspconfig'.texlab.setup {}
 require'lspconfig'.arduino_language_server.setup{}
+require'lspconfig'.qmlls.setup {
+	cmd = {"qmlls6", "-E"};
+}
 
 -- cmp configuration
 

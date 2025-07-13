@@ -62,6 +62,7 @@ hyprlock
 imagemagick
 intel-media-driver
 intel-ucode
+kicad
 kitty
 less
 lf
@@ -99,6 +100,7 @@ pulseaudio-bluetooth
 python-setuptools
 qmk
 qrencode
+quickshell-git
 rofi-lbonn-wayland-git
 root
 runit
@@ -145,6 +147,7 @@ xorg-xev
 yay
 zathura-git
 zathura-pdf-poppler-git
+zeal
 zen-browser-bin
 zsh
 zsh-autosuggestions
