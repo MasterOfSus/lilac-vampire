@@ -14,11 +14,14 @@ fi
 
 # aliases section
 
+# I fucking hate corporations, including apple, broadcom, ALMAWIFI
+alias resetwl='doas modprobe -r wl; doas modprobe wl'
+
 # config sharing between root and home user
 alias updateRootCfg='doas .config/.updateRootConfig.sh'
 
 # auto coloring for ls, grep
-alias ls='ls --color=auto'
+alias ls='ls --color=auto --hide=Downloads --hide=Monero'
 alias grep='grep --color=auto'
 
 # dweeb
@@ -26,7 +29,7 @@ alias btw='clear; fastfetch'
 
 # package managing aliases
 alias useless='yay -Qtdq'
-alias ckweb='curl artixlinux.org; ping artixlinux.org'
+alias ckweb='curl kernel.org; ping artixlinux.org'
 alias updatepkglist='yay -Qqe > ~/.installedpkg'
 alias update='yay -Syyu; updatepkglist'
 alias uninstallpkg='doas pacman -Rscn'
@@ -51,6 +54,7 @@ fi
 # coding aliases
 alias formatall='clang-format ./*'
 alias openvm='distrobox enter'
+alias gasSim='cd cppProjects/idealGasSim; openvm sburrUbuntu'
 
 # zsh plugins sourcing scripts, for Artix and Ubuntu
 
@@ -65,6 +69,7 @@ if [ "$(lsb_release -is 2>/dev/null)" = "Ubuntu" ]; then
 	source ~/.powerlevel10k/powerlevel10k.zsh-theme
 	source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 	source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	export CPLUS_INCLUDE_PATH=/home/mogus/cppProjects/idealGasSim/root/include
 fi
 
 # useless ahh binds for history substring search

@@ -13,6 +13,7 @@ baobab
 base
 bash-completion
 bison
+blender
 bluetui
 bluez
 bluez-runit
@@ -44,7 +45,6 @@ facetimehd-firmware
 fakeroot
 fastfetch
 flex
-frame-eth
 fzf
 gimp
 girara-git
@@ -81,7 +81,6 @@ llvm
 m4
 man-db
 meson
-monero-gui
 mpv
 musikcube-bin
 nano
@@ -95,13 +94,14 @@ patchelf
 pavucontrol
 pkgconf
 podman
+popsicle
 pulseaudio
 pulseaudio-bluetooth
 python-setuptools
+qbittorrent
 qmk
 qrencode
-quickshell-git
-rofi-lbonn-wayland-git
+rofi
 root
 runit
 rust
@@ -110,9 +110,6 @@ scdoc
 sdl2-compat
 sfml
 signal-desktop
-spotify-tui
-spotifyd
-spotifyd-runit
 startup-notification
 steam
 sudo
@@ -130,7 +127,6 @@ ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 unrar
 unzip
-valgrind
 vi
 virtualbox
 waybar

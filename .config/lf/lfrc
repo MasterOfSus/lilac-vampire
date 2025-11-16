@@ -1,8 +1,27 @@
-set hidden true
+set hidden false
 set icons true
+set hiddenfiles "Downloads:Monero"
+
+cmd toggle-dotfiles {
+    if [ "$hiddenfiles" = "^\\.:Downloads:Monero" ]; then
+				set hiddenfiles "Downloads:Monero"
+    else
+        set filter 'Downloads:Monero'
+    fi
+}
+
+cmd toggle-dotfiles '
+    if o "$current" | grep -q "^\(\.\\*\|\\.\)\|Downloads\|Monero"; then
+        lf -remote "send $id set hiddenfiles \"Downloads|Monero\""
+    else
+        lf -remote "send $id set hiddenfiles \"^\\.|Downloads|Monero\""
+    fi
+'
+# Keybinding
+map zd :toggle-dotfiles
 
 # interpreter for shell commands
-set shell sh
+set shell zsh
 
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to

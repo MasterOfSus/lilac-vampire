@@ -169,13 +169,14 @@ require'nvim-treesitter.configs'.setup {
 -- lspconfig config
 local lspconfig = require('lspconfig')
 
-require'lspconfig'.clangd.setup {}
-require'lspconfig'.texlab.setup {}
-require'lspconfig'.arduino_language_server.setup{}
-require'lspconfig'.qmlls.setup {
-	cmd = {"qmlls6", "-E"};
-}
-
+ -- vim.lsp.config('clangd')
+vim.lsp.enable('clangd')
+ -- vim.lsp.config('texlab')
+vim.lsp.enable('texlab')
+ -- vim.lsp.config('arduino_language_server')
+vim.lsp.enable('arduino_language_server')
+vim.lsp.config('qmlls', {cmd = {"qmlls6m", "-E"},})
+vim.lsp.enable('qmlls')
 -- cmp configuration
 
 local cmp = require'cmp'
