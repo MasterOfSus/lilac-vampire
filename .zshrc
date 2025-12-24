@@ -112,3 +112,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8b3fb2"
 export PATH=.:$PATH
 export MANPAGER='nvim +Man!'
 
+
+# Created by `pipx` on 2025-11-25 12:55:19
+export PATH="$PATH:/home/mogus/.local/bin"

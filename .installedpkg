@@ -1,4 +1,5 @@
 acpilight
+amdapp-sdk
 ani-cli
 appstream-glib
 archlinux-keyring
@@ -6,6 +7,7 @@ archlinux-mirrorlist
 arduino-language-server
 aria2
 asio
+audacity
 autoconf
 automake
 awesome-terminal-fonts
@@ -25,6 +27,7 @@ cimg
 clang
 cli-visualizer-git
 cmake
+cmake-language-server
 cpio
 debugedit
 dhcp
@@ -38,6 +41,7 @@ duf
 efibootmgr
 electrum
 elogind-runit
+exfat-utils
 faad2
 facetimehd-data
 facetimehd-dkms
@@ -46,6 +50,7 @@ fakeroot
 fastfetch
 flex
 fzf
+geekbench
 gimp
 girara-git
 git
@@ -63,6 +68,7 @@ imagemagick
 intel-media-driver
 intel-ucode
 kicad
+kid3
 kitty
 less
 lf
@@ -123,6 +129,7 @@ texlive-binextra
 texlive-latex
 texlive-latexextra
 texlive-plaingeneric
+transmission-cli
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 unrar
