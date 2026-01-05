@@ -1,5 +1,4 @@
 acpilight
-amdapp-sdk
 ani-cli
 appstream-glib
 archlinux-keyring
@@ -50,7 +49,6 @@ fakeroot
 fastfetch
 flex
 fzf
-geekbench
 gimp
 girara-git
 git

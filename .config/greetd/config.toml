@@ -6,9 +6,10 @@ vt = 1
 # The default session, also known as the greeter.
 [default_session]
 user = "mogus"
-command = "echo \"starting shit\""
+command = "start-hyprland; hyprlock"
 [initial_session]
-command = "Hyprland; hyprlock"
+command = "echo \"starting shit\""
+command = "start-hyprland; hyprlock"
 user = "mogus"
 # `agreety` is the bundled agetty/login-lookalike. You can replace `/bin/sh`
 # with whatever you want started, such as `sway`.
