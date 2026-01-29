@@ -1,3 +1,4 @@
+abcde
 acpilight
 ani-cli
 appstream-glib
@@ -52,6 +53,7 @@ fzf
 gimp
 girara-git
 git
+glow
 go
 greetd
 greetd-runit
@@ -71,6 +73,7 @@ kitty
 less
 lf
 libayatana-appindicator
+libcdaudio
 libcurl-gnutls
 libev
 libgme
@@ -85,6 +88,7 @@ llvm
 m4
 man-db
 meson
+mplayer
 mpv
 musikcube-bin
 nano
@@ -99,6 +103,7 @@ pavucontrol
 pkgconf
 podman
 popsicle
+prismlauncher
 pulseaudio
 pulseaudio-bluetooth
 python-setuptools
@@ -108,11 +113,13 @@ qrencode
 rofi
 root
 runit
-rust
+rust-analyzer
+rustup
 sassc
 scdoc
 sdl2-compat
 sfml
+showtime
 signal-desktop
 startup-notification
 steam
@@ -127,6 +134,7 @@ texlive-binextra
 texlive-latex
 texlive-latexextra
 texlive-plaingeneric
+totem
 transmission-cli
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
@@ -134,10 +142,13 @@ unrar
 unzip
 vi
 virtualbox
+vlc-plugin-ffmpeg
 waybar
 wget
 which
+whipper
 wl-clipboard
+woeusb
 xcb-util-cursor
 xcb-util-xrm
 xdg-user-dirs

@@ -1,3 +1,6 @@
+# hey this config file put here does jackshit, remember that 
+# the one that is actually used is located in /etc/greetd, copy it there
+
 [terminal]
 # The VT to run the greeter on. Can be "next", "current" or a number
 # designating the VT.
@@ -6,11 +9,10 @@ vt = 1
 # The default session, also known as the greeter.
 [default_session]
 user = "mogus"
-command = "start-hyprland; hyprlock"
+command = "start-hyprland"
 [initial_session]
-command = "echo \"starting shit\""
-command = "start-hyprland; hyprlock"
 user = "mogus"
+command = "start-hyprland"
 # `agreety` is the bundled agetty/login-lookalike. You can replace `/bin/sh`
 # with whatever you want started, such as `sway`.
 # The user to run the command as. The privileges this user must have depends

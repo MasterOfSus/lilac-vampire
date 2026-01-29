@@ -54,7 +54,10 @@ fi
 # coding aliases
 alias formatall='clang-format ./*'
 alias openvm='distrobox enter'
-alias gasSim='cd cppProjects/idealGasSim; openvm sburrUbuntu'
+alias gasSim='cd projects/coding/cpp/idealGasSim; openvm sburrUbuntu'
+alias code='cd projects/coding'
+alias rustCode='cd projects/coding/rust'
+alias cppCode='cd projects/coding/cpp'
 
 # zsh plugins sourcing scripts, for Artix and Ubuntu
 
@@ -69,6 +72,7 @@ if [ "$(lsb_release -is 2>/dev/null)" = "Ubuntu" ]; then
 	source ~/.powerlevel10k/powerlevel10k.zsh-theme
 	source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 	source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	source $HOME/root/bin/thisroot.sh
 	export CPLUS_INCLUDE_PATH=/home/mogus/cppProjects/idealGasSim/root/include
 fi
 
@@ -103,6 +107,8 @@ compinit
 # https://t.ly/AQtnW
 alias ll='ls -la'
 alias l='ls -l'
+
+alias addmp4='/home/mogus/.addmp4.zsh'
 
 # zsh autosuggestions highlight fix
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8b3fb2"

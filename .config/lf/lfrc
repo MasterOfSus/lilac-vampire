@@ -2,21 +2,21 @@ set hidden false
 set icons true
 set hiddenfiles "Downloads:Monero"
 
-cmd toggle-dotfiles {
-    if [ "$hiddenfiles" = "^\\.:Downloads:Monero" ]; then
-				set hiddenfiles "Downloads:Monero"
+cmd toggle-dotfiles ${{
+    # Get current hiddenfiles value
+    cur_hidden=$(lf -remote "send $id print hiddenfiles")
+    
+    # Check if dotfiles are currently hidden
+    if [[ "$cur_hidden" =~ \^\\. ]]; then
+        # Dotfiles are hidden → show them, keep Downloads and Monero hidden
+        lf -remote "send $id set hiddenfiles 'Downloads|Monero'"
     else
-        set filter 'Downloads:Monero'
+        # Dotfiles are visible → hide them along with Downloads and Monero
+        lf -remote "send $id set hiddenfiles '^\\.|Downloads|Monero'"
     fi
-}
+}}
 
-cmd toggle-dotfiles '
-    if o "$current" | grep -q "^\(\.\\*\|\\.\)\|Downloads\|Monero"; then
-        lf -remote "send $id set hiddenfiles \"Downloads|Monero\""
-    else
-        lf -remote "send $id set hiddenfiles \"^\\.|Downloads|Monero\""
-    fi
-'
+
 # Keybinding
 map zd :toggle-dotfiles
 
@@ -30,7 +30,7 @@ set shell zsh
 # $fx variables contain names with '*' or '?' characters. However, this option
 # is used selectively within individual commands as it can be limiting at
 # times.
-set shellopts '-eu'
+set shellopts '-eui'
 
 # set internal field separator (IFS) to "\n" for shell commands
 # This is useful to automatically split file names in $fs and $fx properly
@@ -63,10 +63,35 @@ map O $mimeopen --ask $f
 # This command is called when current file is not a directory. You may want to
 # use either file extensions and/or mime types here. Below uses an editor for
 # text files and a file opener for the rest.
-cmd open &{{
-    case $(file --mime-type -Lb $f) in
-        text/*) lf -remote "send $id \$$EDITOR \$fx";;
-        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+cmd open ${{
+    mime=$(file --mime-type -Lb "$f")
+
+    case "$mime" in
+        text/*)
+            nvim "$f"
+            ;;
+        video/*)
+            dir=$(dirname "$f")
+
+            # build playlist array safely (handles spaces/newlines)
+            playlist=()
+            while IFS= read -r -d $'\0' file; do
+                playlist+=("$file")
+            done < <(find "$dir" -maxdepth 1 -type f \( -iname '*.mp4' -o -iname '*.mkv' -o -iname '*.webm' -o -iname '*.avi' \) -print0 | sort -z)
+
+            # rotate playlist so selected file is first
+            while [[ "${playlist[1]}" != "$f" ]]; do
+                playlist=("${playlist[@][2,-1]}" "${playlist[1]}")
+            done
+
+            # launch mpv with playlist looping
+            mpv "${(@)playlist}" --loop-playlist=inf --loop-file=inf &
+            ;;
+        *)
+            for file in $fx; do
+                xdg-open "$file" &
+            done
+            ;;
     esac
 }}
 

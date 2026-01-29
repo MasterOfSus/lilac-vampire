@@ -12,9 +12,10 @@ vim.opt.shiftwidth = 2
 
 -- Set rounded borders for LSP hover, signature help, etc.
 local border = "rounded"
+local border_style = "rounded"
 local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border_style }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border_style }),
 }
 
 for name, handler in pairs(handlers) do
@@ -94,6 +95,9 @@ Plug('romgrk/barbar.nvim')
 -- arduino
 Plug('stevearc/vim-arduino')
 
+-- friendly snippets
+Plug('rafamadriz/friendly-snippets')
+
 vim.call('plug#end')
 
 -- 24-bit colour
@@ -123,9 +127,9 @@ vim.g.vimtex_view_forward_search_on_start = false
 
 -- treesitter configuration
 
-require'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.config").setup({
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "latex", "cpp", "bash", "arduino", "qmljs", "cmake" },
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "latex", "cpp", "bash", "arduino", "qmljs", "cmake", "rust", "toml" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -147,8 +151,9 @@ require'nvim-treesitter.configs'.setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = { "c", "rust", "latex", },
-		additional_vim_regex_highlighting = { "latex", "markdown" },
+    disable = { "c", "latex" },
+		-- additional_vim_regex_highlighting = { "latex", "markdown" },
+		additional_vim_regex_highlighting = false;
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
     disable = function(lang, buf)
         local max_filesize = 100 * 1024 -- 100 KB
@@ -162,12 +167,20 @@ require'nvim-treesitter.configs'.setup {
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
   },
-}
+})
+
+vim.treesitter.start = (function(orig)
+  return function(bufnr, lang)
+    local ok, err = pcall(orig, bufnr, lang)
+    if not ok then
+      vim.notify("Tree-sitter disabled: " .. err, vim.log.levels.WARN)
+    end
+  end
+end)(vim.treesitter.start)
 
 -- lspconfig config
-local lspconfig = require('lspconfig')
+local lspconfig = vim.lsp.config["lspconfig"]
 
  -- vim.lsp.config('clangd')
 vim.lsp.enable('clangd')
@@ -176,11 +189,14 @@ vim.lsp.enable('texlab')
 vim.lsp.enable('cmake')
  -- vim.lsp.config('arduino_language_server')
 vim.lsp.enable('arduino_language_server')
-vim.lsp.config('qmlls', {cmd = {"qmlls6m", "-E"},})
-vim.lsp.enable('qmlls')
+vim.lsp.enable('rust_analyzer')
+
+vim.lsp.enable('toml')
 -- cmp configuration
 
 local cmp = require'cmp'
+
+require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
   snippet = {
@@ -191,7 +207,7 @@ cmp.setup({
   },
   window = {
     completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered()
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -201,11 +217,16 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' }, -- For luasnip users.
-  }, {
-    { name = 'buffer' },
+    { name = 'path' },                              -- file paths
+    { name = 'nvim_lsp' },      -- from language server
+    { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
+    { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
+    { name = 'buffer', keyword_length = 2 },        -- source current buffer
+    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
+		{ name = 'luasnip' },
+    { name = 'calc'},
   }),
+
 })
 
 -- luasnip for latex
@@ -310,6 +331,9 @@ catppuccin.setup {
   },
 }
 
+vim.g.catppuccin_enable_italic = true
+vim.g.catppuccin_enable_bold = true
+
 vim.cmd.colorscheme "catppuccin"
 
 local function arduino_status()
@@ -343,10 +367,15 @@ require('lualine').setup({
   },
 })
 
+--floating window override
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 -- border color override
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#c182ff", bg = "none" })
 -- Scrollbar thumb override
 vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#50fa7b" })
+vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
+vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#311733" })
+vim.api.nvim_set_hl(0, "PmenuSbar", { bg = "none" })
 
 -- image.nvim
 require("image").setup({
