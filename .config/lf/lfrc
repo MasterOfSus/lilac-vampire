@@ -67,9 +67,15 @@ cmd open ${{
     mime=$(file --mime-type -Lb "$f")
 
     case "$mime" in
+				audio/*)
+						kid3 "$f" > /dev/null 2>&1
+						;;
         text/*)
             nvim "$f"
             ;;
+				application/pdf*)
+						zathura "$f" &
+						;;
         video/*)
             dir=$(dirname "$f")
 
@@ -85,8 +91,12 @@ cmd open ${{
             done
 
             # launch mpv with playlist looping
-            mpv "${(@)playlist}" --loop-playlist=inf --loop-file=inf &
+            mpv --no-terminal "${(@)playlist}" --loop-playlist=inf --loop-file=inf &
             ;;
+				image/*)
+						dir=$(dirname "$f")
+						imv "$dir" -n "$f"
+						;;
         *)
             for file in $fx; do
                 xdg-open "$file" &

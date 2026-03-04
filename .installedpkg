@@ -1,5 +1,6 @@
 abcde
 acpilight
+alsa-plugins
 ani-cli
 appstream-glib
 archlinux-keyring
@@ -25,11 +26,12 @@ btop
 check
 cimg
 clang
-cli-visualizer-git
+cli-visualizer
 cmake
 cmake-language-server
 cpio
 debugedit
+detox
 dhcp
 discord
 distrobox
@@ -41,6 +43,7 @@ duf
 efibootmgr
 electrum
 elogind-runit
+ex-vi-compat
 exfat-utils
 faad2
 facetimehd-data
@@ -48,6 +51,7 @@ facetimehd-dkms
 facetimehd-firmware
 fakeroot
 fastfetch
+ffuf
 flex
 fzf
 gimp
@@ -61,10 +65,12 @@ grim
 groff
 grub
 gtk4
+gvim
 hypridle
 hyprland
 hyprlock
 imagemagick
+imv
 intel-media-driver
 intel-ucode
 kicad
@@ -88,6 +94,7 @@ llvm
 m4
 man-db
 meson
+mitmproxy
 mplayer
 mpv
 musikcube-bin
@@ -100,6 +107,7 @@ opendoas
 openssh
 patchelf
 pavucontrol
+perl-image-exiftool
 pkgconf
 podman
 popsicle
@@ -110,8 +118,11 @@ python-setuptools
 qbittorrent
 qmk
 qrencode
+rankmirrors
+reflector
 rofi
 root
+rsync
 runit
 rust-analyzer
 rustup
@@ -140,7 +151,6 @@ ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 unrar
 unzip
-vi
 virtualbox
 vlc-plugin-ffmpeg
 waybar

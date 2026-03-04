@@ -71,3 +71,45 @@ images/cover.jpg
 images/smalltext.jpg
 images/text.jpg
 images/text.png
+.addmp4.zsh
+.atom/
+.config/Atom-ng/
+.config/ReText project/
+.config/dleyna-renderer-service.conf
+.config/ffuf/
+.config/glow/
+.config/gthumb/
+.config/imv/
+.config/totem/
+.config/vis/
+.config/vlc/
+.config/whipper/
+.grip
+.grip-oggenc
+.local/share/PrismLauncher/
+.local/share/bluetui/
+.local/share/gnome-photos/
+.local/share/gvfs-metadata/
+.local/share/markdown-reader/
+.local/share/nautilus/
+.local/share/nvim/site/parser-info/
+.local/share/nvim/site/parser/
+.local/share/nvim/site/queries/
+.local/share/shotwell/
+.local/share/vlc/
+.markdown-reader/
+.minecraft/
+.mitmproxy/
+.mplayer/
+.rustup/
+.thunderbird/
+core
+go/
+images/album covers/
+images/angel.jpg
+images/conpiracy.png
+images/for clothing/
+images/gimp stuff/
+images/markdown cheatsheet.jpg
+images/sample images/
+rootMacros/
