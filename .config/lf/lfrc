@@ -76,6 +76,9 @@ cmd open ${{
 				application/pdf*)
 						zathura "$f" &
 						;;
+				application/epub*)
+						zathura "$f" &
+						;;
         video/*)
             dir=$(dirname "$f")
 

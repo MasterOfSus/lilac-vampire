@@ -14,8 +14,25 @@ fi
 
 # aliases section
 
+alias reload='source ~/.zshrc'
+alias syncClock='doas chronyd -q "pool pool.ntp.org iburst" & doas hwclock --systohc'
+
 # I fucking hate corporations, including apple, broadcom, ALMAWIFI
-alias resetwl='doas modprobe -r wl; doas modprobe wl'
+alias nukewifi='doas modprobe -r wl; doas modprobe wl'
+alias dioporco='nukewifi'
+alias porcodio='dioporco'
+alias diocane='dioporco'
+alias diomerda='diocane'
+alias diobastardo='diomerda'
+alias diotroia='diobastardo'
+alias lamadonnaputtana='diotroia'
+alias diomaiale='lamadonnaputtana'
+alias pleaseeeeee='diobastardo'
+
+alias resetwifi='nmcli device disconnect wlan0; nmcli device connect wlan0'
+
+alias hotspot='nmcli connection up susPhone'
+alias iGiveUp='hotspot'
 
 # config sharing between root and home user
 alias updateRootCfg='doas .config/.updateRootConfig.sh'
@@ -46,7 +63,7 @@ alias EMPTYTRASH='doas rm -rf ~/trash/*'
 # main system specific aliases
 if [ "$(lsb_release -is 2>/dev/null)" = "Artix" ]; then
 	alias sudo='doas'
-	alias blue='doas sv up bluetoothd; bluetui'
+	alias blue='sv status bluetoothd | grep -q "^run:" || doas sv up bluetoothd; bluetui'
 	alias poweroff='doas poweroff'
 	alias connect='nmcli connection up'
 fi
@@ -121,3 +138,14 @@ export MANPAGER='nvim +Man!'
 
 # Created by `pipx` on 2025-11-25 12:55:19
 export PATH="$PATH:/home/mogus/.local/bin"
+
+# goto
+source ~/.goto.zsh 
+
+# fix mount
+alias mount='mount -o fmask=0133,dmask=0022,uid=$(id -u),gid=$(id -g)'
+
+# seamly fix???
+alias seamly2d='QT_QPA_PLATFORM=xcb seamly2d'
+alias seamlyme='QT_QPA_PLATFORM=xcb seamlyme'
+

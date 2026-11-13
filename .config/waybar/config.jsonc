@@ -157,6 +157,7 @@
 		},
     "custom/powerbutton": {
  		 		"format": "",
+				"justify": "center",
     		"tooltip": false,
     }
 }
