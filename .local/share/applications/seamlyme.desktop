@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=SeamlyMe
+Exec=env QT_QPA_PLATFORM=xcb seamlyme %F
+Version=1.0
+GenericName=Seamly2D's body measurements editor
+Comment=Create and edit body measurements
+Comment[uk]=Створення та редагування розмірів тіла
+Comment[ru]=Создание и редактирование размеров тела
+Icon=seamlyme
+Terminal=false
+MimeType=application/x-seamlyme-multi_size_file;application/x-seamlyme-individual_size_file;
+Categories=Qt;Utility;FileTools;Engineering

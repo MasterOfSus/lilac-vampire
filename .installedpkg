@@ -30,6 +30,7 @@ clang
 cli-visualizer
 cmake
 cmake-language-server
+cmatrix-git
 cpio
 debugedit
 detox
@@ -77,6 +78,7 @@ intel-ucode
 kicad
 kid3
 kitty
+lavat
 less
 lf
 libayatana-appindicator
@@ -127,9 +129,11 @@ qmk
 qrencode
 rankmirrors
 reflector
+restic
 rofi
 root
 rsync
+ruby
 runit
 rust-analyzer
 rustup
@@ -182,6 +186,7 @@ yay
 ytsurf
 zathura
 zathura-epub-mupdf
+zathura-pdf-poppler
 zeal
 zen-browser-bin
 zsh

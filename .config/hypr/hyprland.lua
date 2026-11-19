@@ -168,7 +168,7 @@ hl.layer_rule({
 
 hl.layer_rule({
     match = { namespace = "match:namespace rofi" },
-    ignore_alpha = 0.1,
+    ignore_alpha = 0.5,
 })
 
 hl.bind(mainMod .. " + SHIFT + f", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))

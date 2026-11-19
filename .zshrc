@@ -18,7 +18,7 @@ alias reload='source ~/.zshrc'
 alias syncClock='doas chronyd -q "pool pool.ntp.org iburst" & doas hwclock --systohc'
 
 # I fucking hate corporations, including apple, broadcom, ALMAWIFI
-alias nukewifi='doas modprobe -r wl; doas modprobe wl'
+alias nukewifi='doas sv stop NetworkManager; doas rmmod wl; doas modprobe wl; doas sv start NetworkManager'
 alias dioporco='nukewifi'
 alias porcodio='dioporco'
 alias diocane='dioporco'
@@ -145,7 +145,9 @@ source ~/.goto.zsh
 # fix mount
 alias mount='mount -o fmask=0133,dmask=0022,uid=$(id -u),gid=$(id -g)'
 
-# seamly fix???
-alias seamly2d='QT_QPA_PLATFORM=xcb seamly2d'
-alias seamlyme='QT_QPA_PLATFORM=xcb seamlyme'
+# screensaver
+alias fancyss='fancyss >/dev/null'
+alias functss='functss >/dev/null'
 
+# coingecko
+alias cgck='~/go/bin/coingecko-cli'

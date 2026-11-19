@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Seamly2D
+Exec=env QT_QPA_PLATFORM=xcb seamly2d %F
+Version=1.0
+GenericName=Pattern making program
+Comment=CAD program for design of clothing patterns
+Comment[ru]=CAD программа для проектирования выкроек одежды
+Comment[uk]=CAD програма для проектування викрійок одягу
+Icon=seamly2d
+Terminal=false
+MimeType=application/x-seamly2d-pattern;
+Categories=Graphics;VectorGraphics;2DGraphics;Qt;Engineering;
